@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaúdeVax | Controle de Vacinas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">+</div><div><strong>SaúdeVax</strong><span>Controle de Vacinas</span></div></div>
+    <nav>
+      <button class="nav-item active" data-page="dashboard">Visão geral</button>
+      <button class="nav-item" data-page="pacientes">Pacientes</button>
+      <button class="nav-item" data-page="vacinas">Vacinas e estoque</button>
+      <button class="nav-item" data-page="aplicacoes">Aplicações</button>
+    </nav>
+    <div class="sidebar-footer">Sistema demonstrativo<br><small>Dados salvos neste navegador</small></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><p class="eyebrow">POSTO DE SAÚDE</p><h1 id="pageTitle">Visão geral</h1></div>
+      <div class="user-chip"><span class="avatar">PS</span><div><strong>Profissional</strong><small>Unidade de Saúde</small></div></div>
+    </header>
+
+    <section id="dashboard" class="page active">
+      <div class="hero"><div><span class="badge">Painel de controle</span><h2>Gestão de vacinação simples e segura.</h2><p>Cadastre pacientes, acompanhe o estoque e registre aplicações em um só lugar.</p></div><div class="hero-mark">+</div></div>
+      <div class="stats">
+        <article class="stat"><span>Pacientes cadastrados</span><strong id="statPacientes">0</strong><small>registros ativos</small></article>
+        <article class="stat"><span>Vacinas em estoque</span><strong id="statDoses">0</strong><small>doses disponíveis</small></article>
+        <article class="stat"><span>Aplicações registradas</span><strong id="statAplicacoes">0</strong><small>histórico total</small></article>
+        <article class="stat warning"><span>Alertas de estoque</span><strong id="statAlertas">0</strong><small>estoque baixo ou vencimento</small></article>
+      </div>
+      <div class="grid-2">
+        <article class="card"><div class="card-head"><div><p class="eyebrow">ESTOQUE</p><h3>Vacinas que exigem atenção</h3></div><button class="link-btn" data-go="vacinas">Ver estoque</button></div><div id="alertList" class="list"></div></article>
+        <article class="card"><div class="card-head"><div><p class="eyebrow">ATIVIDADE</p><h3>Aplicações recentes</h3></div><button class="link-btn" data-go="aplicacoes">Ver histórico</button></div><div id="recentList" class="list"></div></article>
+      </div>
+    </section>
+
+    <section id="pacientes" class="page">
+      <div class="section-head"><div><p>Gerencie as pessoas atendidas pela unidade.</p></div><button class="primary" data-modal="pacienteModal">+ Novo paciente</button></div>
+      <article class="card"><div class="toolbar"><input id="buscaPaciente" type="search" placeholder="Buscar por nome ou CPF..."></div><div class="table-wrap"><table><thead><tr><th>Nome</th><th>CPF</th><th>Telefone</th><th>Nascimento</th><th></th></tr></thead><tbody id="pacienteTable"></tbody></table></div></article>
+    </section>
+
+    <section id="vacinas" class="page">
+      <div class="section-head"><div><p>Controle lotes, validade e quantidade de doses.</p></div><button class="primary" data-modal="vacinaModal">+ Nova vacina</button></div>
+      <article class="card"><div class="toolbar"><input id="buscaVacina" type="search" placeholder="Buscar por vacina, fabricante ou lote..."></div><div class="table-wrap"><table><thead><tr><th>Vacina</th><th>Lote</th><th>Validade</th><th>Estoque</th><th>Status</th><th></th></tr></thead><tbody id="vacinaTable"></tbody></table></div></article>
+    </section>
+
+    <section id="aplicacoes" class="page">
+      <div class="section-head"><div><p>Registre doses aplicadas e mantenha o histórico do atendimento.</p></div><button class="primary" data-modal="aplicacaoModal">+ Registrar aplicação</button></div>
+      <article class="card"><div class="toolbar"><input id="buscaAplicacao" type="search" placeholder="Buscar por paciente, vacina ou profissional..."></div><div class="table-wrap"><table><thead><tr><th>Data</th><th>Paciente</th><th>Vacina</th><th>Profissional</th><th>Observação</th><th></th></tr></thead><tbody id="aplicacaoTable"></tbody></table></div></article>
+    </section>
+  </main>
+
+  <div class="modal" id="pacienteModal"><div class="modal-card"><div class="modal-head"><div><p class="eyebrow">CADASTRO</p><h3>Novo paciente</h3></div><button class="close">×</button></div><form id="pacienteForm" novalidate><label>CPF<input id="cpf" inputmode="numeric" maxlength="11" placeholder="Somente 11 números" required></label><label>Nome completo<input id="nomePaciente" maxlength="100" required></label><label>Telefone<input id="telefone" inputmode="numeric" maxlength="11" placeholder="DDD + número" required></label><label>Data de nascimento<input id="nascimento" type="date" required></label><p class="form-error" id="pacienteError"></p><button class="primary full" type="submit">Cadastrar paciente</button></form></div></div>
+
+  <div class="modal" id="vacinaModal"><div class="modal-card"><div class="modal-head"><div><p class="eyebrow">ESTOQUE</p><h3>Nova vacina</h3></div><button class="close">×</button></div><form id="vacinaForm" novalidate><label>Nome da vacina<input id="nomeVacina" maxlength="100" required></label><label>Fabricante<input id="fabricante" maxlength="100" required></label><div class="form-row"><label>Lote<input id="lote" maxlength="50" required></label><label>Validade<input id="validade" type="date" required></label></div><div class="form-row"><label>Quantidade<input id="quantidade" type="number" min="0" step="1" required></label><label>Estoque mínimo<input id="estoqueMinimo" type="number" min="0" step="1" required></label></div><p class="form-error" id="vacinaError"></p><button class="primary full" type="submit">Cadastrar vacina</button></form></div></div>
+
+  <div class="modal" id="aplicacaoModal"><div class="modal-card"><div class="modal-head"><div><p class="eyebrow">ATENDIMENTO</p><h3>Registrar aplicação</h3></div><button class="close">×</button></div><form id="aplicacaoForm" novalidate><label>CPF do paciente<input id="aplicacaoCpf" inputmode="numeric" maxlength="11" placeholder="Somente 11 números" required></label><label>Vacina<select id="aplicacaoVacina" required><option value="">Selecione uma vacina</option></select></label><label>Profissional responsável<input id="profissional" maxlength="100" required></label><label>Observação<textarea id="observacao" rows="3" maxlength="250" placeholder="Opcional"></textarea></label><p class="form-error" id="aplicacaoError"></p><button class="primary full" type="submit">Confirmar aplicação</button></form></div></div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
