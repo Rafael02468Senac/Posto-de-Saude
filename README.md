@@ -14,7 +14,6 @@ SaúdeVax é um sistema para gerenciar pacientes, vacinas e aplicações em um p
 - **Frontend**: HTML, CSS e JavaScript.
 
 ## Instalação
-1. Certifique-se de ter o Java (versão X) e MySQL instalados.
-2. Clone o repositório:
+1. Clone o repositório:
    ```bash
    git clone <URL_DO_REPOSITORIO>
